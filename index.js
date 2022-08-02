@@ -1,12 +1,6 @@
 'use strict';
 
-var defaultExport = module.exports;
-var bitcore = {};
-var bitcorePeerCoin = {};
-
-defaultExport.bitcore = bitcore;
-defaultExport.bitcorePeerCoin = bitcorePeerCoin;
-
+var bitcore = module.exports;
 
 // module information
 bitcore.version = 'v' + require('./package.json').version;
@@ -74,72 +68,3 @@ bitcore.deps._ = require('lodash');
 
 // Internal usage, exposed for testing/advanced tweaking
 bitcore.Transaction.sighash = require('./lib/transaction/sighash');
-
-
-
-// module information
-bitcorePeerCoin.version = 'v' + require('./package.json').version;
-bitcorePeerCoin.versionGuard = function(version) {
-  if (version !== undefined) {
-    var message = 'More than one instance of bitcorePeerCoin-lib found. ' +
-      'Please make sure to require bitcorePeerCoin-lib and check that submodules do' +
-      ' not also include their own bitcorePeerCoin-lib dependency.';
-    throw new Error(message);
-  }
-};
-bitcorePeerCoin.versionGuard(global._bitcorePeerCoin);
-global._bitcorePeerCoin = bitcorePeerCoin.version;
-
-// crypto
-bitcorePeerCoin.crypto = {};
-bitcorePeerCoin.crypto.BN = require('./lib/crypto/bn');
-bitcorePeerCoin.crypto.ECDSA = require('./lib/crypto/ecdsa');
-bitcorePeerCoin.crypto.Hash = require('./lib/crypto/hash');
-bitcorePeerCoin.crypto.Random = require('./lib/crypto/random');
-bitcorePeerCoin.crypto.Point = require('./lib/crypto/point');
-bitcorePeerCoin.crypto.Signature = require('./lib/crypto/signature');
-
-// encoding
-bitcorePeerCoin.encoding = {};
-bitcorePeerCoin.encoding.Base58 = require('./lib/encoding/base58');
-bitcorePeerCoin.encoding.Base58Check = require('./lib/encoding/base58check');
-bitcorePeerCoin.encoding.BufferReader = require('./lib/encoding/bufferreader');
-bitcorePeerCoin.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
-bitcorePeerCoin.encoding.Varint = require('./lib/encoding/varint');
-
-// utilities
-bitcorePeerCoin.util = {};
-bitcorePeerCoin.util.buffer = require('./lib/util/buffer');
-bitcorePeerCoin.util.js = require('./lib/util/js');
-bitcorePeerCoin.util.preconditions = require('./lib/util/preconditions');
-
-// errors thrown by the library
-bitcorePeerCoin.errors = require('./lib/errors');
-
-// main bitcoin library
-bitcorePeerCoin.Address = require('./lib/address');
-bitcorePeerCoin.Block = require('./lib/block');
-bitcorePeerCoin.MerkleBlock = require('./lib/block/merkleblock');
-bitcorePeerCoin.BlockHeader = require('./lib/block/blockheader');
-bitcorePeerCoin.HDPrivateKey = require('./lib/hdprivatekey.js');
-bitcorePeerCoin.HDPublicKey = require('./lib/hdpublickey.js');
-bitcorePeerCoin.Message = require('./lib/message');
-bitcorePeerCoin.Networks = require('./lib/networks');
-bitcorePeerCoin.Opcode = require('./lib/opcode');
-bitcorePeerCoin.PrivateKey = require('./lib/privatekey');
-bitcorePeerCoin.PublicKey = require('./lib/publickey');
-bitcorePeerCoin.Script = require('./lib/script');
-bitcorePeerCoin.Transaction = require('./lib/transaction');
-bitcorePeerCoin.URI = require('./lib/uri');
-bitcorePeerCoin.Unit = require('./lib/unit');
-
-// dependencies, subject to change
-bitcorePeerCoin.deps = {};
-bitcorePeerCoin.deps.bnjs = require('bn.js');
-bitcorePeerCoin.deps.bs58 = require('bs58');
-bitcorePeerCoin.deps.Buffer = Buffer;
-bitcorePeerCoin.deps.elliptic = require('elliptic');
-bitcorePeerCoin.deps._ = require('lodash');
-
-// Internal usage, exposed for testing/advanced tweaking
-bitcorePeerCoin.Transaction.sighash = require('./lib/transaction/sighash');
